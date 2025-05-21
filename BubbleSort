@@ -1,0 +1,53 @@
+programa
+     
+{ 
+     inclua biblioteca Util --> u
+     const inteiro x=100
+     inteiro senha[x], a, b
+     
+	funcao gerar_senhas()
+	{
+		a=0
+		enquanto (a!=x){
+			senha[a]=u.sorteia(1, 99)
+			escreva("senha ",a+1,": ",senha[a],"\n")
+		     a++
+		}
+	}
+	
+	funcao bubbleSort()
+{
+  
+    inteiro i, j, temp
+
+    para (i = 0; i < x - 1; i++)
+    {
+        para (j = 0; j < x - 1 - i; j++) 
+        {
+            se (senha[j] > senha[j + 1])
+            {
+                temp = senha[j] 
+                senha[j] = senha[j + 1]
+                senha[j + 1] = temp   
+            }
+        }
+    }
+}
+
+     funcao escreversenhas()
+     {
+     b=0
+     enquanto (b!=x){
+	escreva("senha ",b+1,": ",senha[b],"\n")
+     b++}
+     }
+	
+	funcao inicio()
+	{
+	
+	gerar_senhas()
+	bubbleSort()
+	escreva("\nNUMEROS EM ORDEM CRESCENTE:\n\n")
+	escreversenhas()
+	}
+}
