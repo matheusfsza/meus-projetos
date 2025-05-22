@@ -1,0 +1,27 @@
+programa
+{
+	funcao inicio()
+	{
+		inteiro vetor[10] = {1, 3, 4, 5, 6, 8, 9, 10, 12, 15}
+		inteiro elementoBuscado
+		inteiro indiceEncontrado = -1
+
+          escreva("Escolha um número entre 0 a 15\n")
+		escreva("Digite o número a ser buscado: ")
+		leia(elementoBuscado)
+
+		// Busca Linear
+		para (inteiro i = 0; i < 10; i++) {
+			se (vetor[i] == elementoBuscado) {
+				indiceEncontrado = i
+				pare
+			}
+		}
+
+		se (indiceEncontrado != -1) {
+			escreva("Elemento ", elementoBuscado, " encontrado na posição ", indiceEncontrado, ".\n")
+		} senao {
+			escreva("Elemento não encontrado.\n")
+		}
+	}
+}
