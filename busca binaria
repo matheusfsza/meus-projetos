@@ -1,0 +1,83 @@
+programa
+{
+	funcao inicio()
+	{
+		// Declaração do vetor de exemplo (DEVE ESTAR ORDENADO PARA BUSCA BINÁRIA)
+		inteiro vetor[10] = {1, 3, 4, 5, 6, 8, 9, 10, 12, 15}
+		inteiro elementoBuscado
+		inteiro inicio = 0
+		inteiro fim = 9 // CORREÇÃO AQUI: O último índice é 9 para um vetor de 10 elementos
+		inteiro meio
+		inteiro indiceEncontrado = -1
+
+		escreva("Vetor Ordenado: {")
+		// Loop para imprimir o vetor, usando o tamanho fixo 10
+		para (inteiro i = 0; i < 10; i++) { // CORREÇÃO AQUI
+			escreva(vetor[i])
+			se (i < 9) { // CORREÇÃO AQUI
+				escreva(", ")
+			}
+		}
+		escreva("}\n")
+
+		escreva("Digite o elemento a ser buscado (no vetor ordenado): ")
+		leia(elementoBuscado)
+
+		// --- Início da Busca Binária ---
+		// O loop continua enquanto a parte "não explorada" do vetor tiver elementos
+		enquanto (inicio <= fim) {
+			meio = (inicio + fim) / 2 // Calcula o índice do meio do intervalo atual
+
+			// Se o elemento no meio for igual ao buscado, encontramos!
+			se (vetor[meio] == elementoBuscado) {
+				indiceEncontrado = meio
+				pare // Sai do loop
+			}
+			// Se o elemento no meio for MENOR que o buscado, significa que o elemento
+			// (se existir) deve estar na metade DIREITA do intervalo
+			senao se (vetor[meio] < elementoBuscado) {
+				inicio = meio + 1 // Ajusta o 'inicio' para o elemento após o meio
+			}
+			// Se o elemento no meio for MAIOR que o buscado, significa que o elemento
+			// (se existir) deve estar na metade ESQUERDA do intervalo
+			senao {
+				fim = meio - 1 // Ajusta o 'fim' para o elemento antes do meio
+			}
+		}
+		// --- Fim da Busca Binária ---
+
+		// Verifica o resultado da busca e exibe a mensagem apropriada
+		se (indiceEncontrado != -1) {
+			escreva("Elemento ", elementoBuscado, " encontrado na posição: ", indiceEncontrado, "\n")
+		} senao {
+			escreva("Elemento ", elementoBuscado, " não encontrado no vetor.\n")
+		}
+
+		// --- Exemplo Adicional: Busca Binária para um elemento que NÃO existe ---
+		escreva("\n--- Exemplo de busca por um elemento que NÃO existe ---\n")
+		elementoBuscado = 7 // Elemento que não está no vetor
+		inicio = 0
+		fim = 9 // Reinicia 'inicio' e 'fim' para a nova busca
+		indiceEncontrado = -1
+
+		escreva("Buscando o elemento: ", elementoBuscado, "\n")
+		enquanto (inicio <= fim) {
+			meio = (inicio + fim) / 2
+			se (vetor[meio] == elementoBuscado) {
+				indiceEncontrado = meio
+				pare
+			}
+			senao se (vetor[meio] < elementoBuscado) {
+				inicio = meio + 1
+			}
+			senao {
+				fim = meio - 1
+			}
+		}
+		se (indiceEncontrado != -1) {
+			escreva("Elemento ", elementoBuscado, " encontrado na posição: ", indiceEncontrado, "\n")
+		} senao {
+			escreva("Elemento ", elementoBuscado, " não encontrado no vetor.\n")
+		}
+	}
+}
