@@ -1,0 +1,91 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+    #formulario, #resultado{
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 20px auto;}
+    </style>
+    </head>
+    <body>
+    <h1 style="background-size: auto; background-color: rgb(170, 228, 243); font-family: sans-serif; text-align: center;">Currículo
+    </h1>
+    <form id="formulario" style="display: ;">
+           <label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Nome: <input style="font-family: sans-serif; margin: 15px" type="text" id= "nome" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Idade: <input style="font-family: sans-serif; margin: 15px" type="number" id= "idade" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Email: <input style="font-family: sans-serif; margin: 15px" type="text" id= "email" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Objetivo profissional: <input style="font-family: sans-serif; margin: 15px" type="text" id= "objetivoprofissional" required> </label> 
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Formação acadêmica: <input style="font-family: sans-serif; margin: 15px" type="text" id= "formacaoacademica" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Experiência profissional: <input style="font-family: sans-serif; margin: 15px" type="text" id= "experienciaprofissional" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Cursos complementares: <input style="font-family: sans-serif; margin: 15px" type="text" id= "cursoscomplementares" required> </label>
+           <br><label style="font-family: sans-serif; margin: 15px; margin-left: 15px"> Idiomas: <input style="font-family: sans-serif; margin: 15px" type="text" id= "idiomas" required> </label>
+           <br><button style="cursor: pointer; background-color: rgb(170, 228, 243);font-family: sans-serif; border-style:initial; margin-left: 15px ; font-size: 15px;" type="submit">Enviar</button>
+           </form>
+<div id="resultado" style="display: none;">
+    <h2 style="font-size: 23pt ;background-size: auto; background-color: rgb(170, 228, 243); text-align: center; font-family: sans-serif">Dados Coletados:</h2>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px ">Nome: <span id="res-nome"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Idade: <span id="res-idade"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Email: <span id="res-email"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Objetivo profissional: <span id="res-objetivoprofissional"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Formação acadêmica: <span id="res-formacaoacademica"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Experiência profissional: <span id="res-experienciaprofissional"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Cursos complementares: <span id="res-cursoscomplementares"></span></p>
+    <p style="font-weight: normal ;font-family: sans-serif; text-align: justify; margin: 0 auto; margin: 15px">Idiomas: <span id="res-idiomas"></span></p>
+    <button style="cursor: pointer; background-color: rgb(170, 228, 243);font-family: sans-serif; text-align: center; border-style:initial ; font-size: 15px; margin-left: 15px" onclick="gerarPDF()">Gerar PDF</button>
+</div>
+<script>
+     document.getElementById('formulario').addEventListener('submit', function (event) {
+     event.preventDefault();
+         const nome= document.getElementById('nome').value;
+         const idade= document.getElementById('idade').value;
+         const email= document.getElementById('email').value;
+         const objetivoprofissional= document.getElementById('objetivoprofissional').value;
+         const formaçãoacadêmica= document.getElementById('formacaoacademica').value;
+         const experiênciaprofissional= document.getElementById('experienciaprofissional').value;
+         const cursoscomplementares= document.getElementById('cursoscomplementares').value;
+         const idiomas= document.getElementById('idiomas').value;
+
+         document. getElementById('res-nome').textContent = nome;
+         document. getElementById('res-idade').textContent = idade;
+         document. getElementById('res-email').textContent = email;
+         document. getElementById('res-objetivoprofissional').textContent = objetivoprofissional;
+         document. getElementById('res-formacaoacademica').textContent = formaçãoacadêmica;
+         document. getElementById('res-experienciaprofissional').textContent = experiênciaprofissional;
+         document. getElementById('res-cursoscomplementares').textContent = cursoscomplementares;
+         document. getElementById('res-idiomas').textContent = idiomas;
+         document.getElementById('resultado').style.display = 'block'
+    });
+
+    async function gerarPDF() {
+
+        const {jsPDF} = window.jspdf;
+        const doc = new jsPDF();
+        const nome = document.getElementById('res-nome').textContent;
+        const idade = document.getElementById('res-idade').textContent;
+        const email = document.getElementById('res-email').textContent;
+        const objetivoprofissional = document.getElementById('res-objetivoprofissional').textContent;
+        const formaçãoacadêmica = document.getElementById('res-formacaoacademica').textContent;
+        const experiênciaprofissional = document.getElementById('res-experienciaprofissional').textContent;
+        const cursoscomplementares = document.getElementById('res-cursoscomplementares').textContent;
+        const idiomas = document.getElementById('res-idiomas').textContent;
+        doc.text(" Currículo", 80, 20);
+        doc.text( `Nome: ${nome}`, 10, 40);
+        doc.text( `Idade: ${idade}`, 10, 50);
+        doc.text( `email: ${email}`, 10, 60);
+        doc.text( `Objetivo-profissional: ${objetivoprofissional}`, 10, 70);
+        doc.text( `Formação acadêmica: ${formaçãoacadêmica}`, 10, 80);
+        doc.text( `Experiência profissional: ${experiênciaprofissional}`, 10, 90);
+        doc.text( `Cursos complementares: ${cursoscomplementares}`, 10, 100);
+        doc.text( `Idiomas: ${idiomas}`, 10, 110);
+        doc.save("curriculo.pdf")
+    }
+</script>
+</body>   
+</html>
