@@ -1,0 +1,176 @@
+<html lang="pt-br">
+<meta charset="UTF-8">
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>Página de Login</title>
+
+    <!-- estiizando o codigo -->
+
+    <style>
+
+    #caixa 
+    {
+        background-color: rgb(251, 251, 251);  
+        padding: 80px 100px;
+        align-items: center; 
+        border-radius: 25px;
+        margin-top: 0px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        width: 350px;
+        color: rgb(251, 251, 251);
+    }
+
+    #lgn 
+    { 
+        font-family:"arial"; color: rgb(177, 69, 69);
+        position: relative;
+        top: 285px;
+        right: 10px;
+        font-size: larger;
+    } 
+
+    #botaologin
+    {
+        color: aliceblue ;background-color: rgb(177, 69, 69); font-size: 22px;
+        border-color: rgb(177, 69, 69); border-style: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    h1
+    {
+        font-family:'arial'; color: rgb(177, 69, 69) ;
+        font-size: 40px;
+        position: relative;
+        top: -70px;
+    }
+
+    h2
+    {
+        font-family:'arial'; color: rgb(177, 69, 69) ;
+        font-size: 20pt;
+        position: relative;
+        top: 255px ;
+    }
+
+    body
+    {
+        background-color: rgb(177, 69, 69);
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        background-image: image-set("fundo.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;   
+    }
+
+    button
+    {
+        font-family: sans-serif; color: rgb(177, 69, 69);
+        position: relative;
+        top: 90px;
+        font-size: larger;
+    }
+
+    #fotocardp
+    {
+        height: 230px;
+        border-radius: 0%;
+        position: relative;
+        top: -340px;
+    
+    }
+
+    h3
+    {
+         font-family:'arial'; color: rgb(177, 69, 69) ;
+        font-size: 20pt;
+        position: relative;
+        top: -400px; 
+    }
+    
+    p
+    {
+        font-size: 17pt;
+    }
+
+    </style>
+
+
+</head>
+
+<!--CORPO-->
+
+<body>
+    <div id="caixa">
+    <h1>CardAPPio</h1>
+    <h2>Faça seu LOGIN:</h2>
+        <form id="lgn">
+
+        <p>Nome: <input required type="text" id="nome"/></p>
+
+        <p>Idade: <input required type="number" id="idade"/></p>
+            
+        <p>Email: <input required type="email" id="email"/></p>
+            
+        <p>nº Telf: <input required type="tel" pattern="[0-9]{11}"
+        title="Digite um numero de telefone válido!" id="telf"/></p>
+         
+        </form>
+
+        <img src ="logocardp.png" alt="Foto" id="fotocardp">
+        <button type="button" id="botaologin" onclick="logar()"> CADASTRAR </button>
+    <h3>
+        monte seu cardápio e transforme-o em um pdf tematizado!
+    </h3>
+    </div>
+
+
+    <script>
+
+    function logar(){
+
+        const nome = document.getElementById('nome').value.trim();
+        const idade = document.getElementById('idade').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telf = document.getElementById('telf').value.trim();
+
+    if (!nome || !idade || !telf || !email) 
+
+        {
+            alert("preencha todos os campos"); 
+            return;
+        }
+
+        if  (idade <= 0)
+
+        {
+            alert("Insira uma idade válida"); 
+            return;
+        }
+
+        if (!(email.includes("@") && email.includes(".")))
+
+        {
+            window.alert("Digite um e-mail válido.");
+            return;
+        }
+
+        const telefoneValido = /^[0-9]{11}$/.test(telf);
+        if (!telefoneValido)
+        {
+            window.alert("Digite um numero de telefone válido! (11 números)")
+            return;
+        } 
+        
+        {
+        window.location.href = 'paginainicial.html';
+        }
+    }
+ 
+    </script>
+</body>
+</html>
